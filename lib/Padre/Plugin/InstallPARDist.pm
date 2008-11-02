@@ -41,7 +41,8 @@ sub dialog {
     ],
     [
       [ 'Wx::StaticText',      undef,    'Target perl:'],
-      [ 'Wx::TextCtrl',   '_target_perl_', '',   $^X],
+#      [ 'Wx::FilePickerCtrl',   '_target_perl_', $^X,  'Pick target perl'],
+      [ 'Wx::TextCtrl',   '_target_perl_', $^X],
     ],
     [
       [ 'Wx::Button',     '_ok_',           Wx::wxID_OK     ],
