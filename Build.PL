@@ -22,8 +22,8 @@ my $builder = Padre::PluginBuilder->new(
         'Cwd'                     => 0,
         'Data::Dumper'            => 0,
 
-        'ExtUtils::InferConfig'   => '0.02',
-        'ExtUtils::InstallPAR'    => '0.01',
+        'ExtUtils::InferConfig'   => '1.02',
+        'ExtUtils::InstallPAR'    => '0.03',
         'LWP::Simple'             => '0',
         'Padre'                   => '0.12',
     },
