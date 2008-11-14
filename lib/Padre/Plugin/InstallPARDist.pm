@@ -18,11 +18,13 @@ Padre::Plugin::InstallPARDist - Installation of .par archives into the system
 =head1 SYNOPIS
 
 This is an experimental version of the plugin using the experimental
-plugin interface of Padre 0.12_01.
+plugin interface of Padre 0.16.
 
 FIXME: After installation there should be a menu item I<Padre - PAR - Stand Alone>
 
 =cut
+
+sub menu_name { "Install PAR dist." }
 
 sub menu {
   return(
