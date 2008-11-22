@@ -25,7 +25,7 @@ my $builder = Padre::PluginBuilder->new(
         'ExtUtils::InferConfig'   => '1.03',
         'ExtUtils::InstallPAR'    => '0.03',
         'LWP::Simple'             => '0',
-        'Padre'                   => '0.12',
+        'Padre'                   => '0.18',
     },
     build_requires        => {
         'Test::More'              => '0.47',
