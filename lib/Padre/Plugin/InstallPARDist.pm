@@ -1,13 +1,18 @@
 package Padre::Plugin::InstallPARDist;
 use strict;
 use warnings;
+use base 'Padre::Plugin';
 
-use Wx         qw(:everything);
-use Wx::Event  qw(:everything);
-use ExtUtils::InstallPAR ();
-use LWP::Simple ();
-require Padre;
-require Padre::Wx::Dialog;
+#use Wx         qw(:everything);
+#use Wx::Event  qw(:everything);
+use Padre::Wx;
+
+sub require_modules {
+    require LWP::Simple;
+    require ExtUtils::InstallPAR;
+    require ExtUtils::InferConfig;
+    require Padre::Wx::Dialog;
+}
 
 our $VERSION = '0.01';
 
@@ -18,18 +23,15 @@ Padre::Plugin::InstallPARDist - Installation of .par archives into the system
 =head1 SYNOPIS
 
 This is an experimental version of the plugin using the experimental
-plugin interface of Padre 0.16.
-
-FIXME: After installation there should be a menu item I<Padre - PAR - Stand Alone>
+plugin interface of Padre 0.17.
 
 =cut
 
-sub menu_name { "Install PAR dist." }
-
-sub menu {
-  return(
-    ["Install PAR dist.", \&on_install_par_dist],
-  );
+sub menu_plugins_simple {
+    my $self = shift;
+    return 'Install PAR dist.' => [
+      'Install PAR distribution' => \&on_install_par_dist,
+    ];
 }
 
 
@@ -91,7 +93,7 @@ sub ok_clicked {
   
   my $par = $data->{_par_uri_};
   if ( not defined $par or ( not -f $par and not $par =~ /^\w+:/ ) ) {
-    Wx::MessageBox( "No PAR URL or path supplied.", "Failed", wxOK|wxCENTRE, $main_window );
+    Wx::MessageBox( "No PAR URL or path supplied.", "Failed", Wx::wxOK|Wx::wxCENTRE, $main_window );
     return;
   }
 
@@ -101,9 +103,9 @@ sub ok_clicked {
   );
 
   if ($success) {
-    Wx::MessageBox( "Installed '$par' into '$perl'", "Done", wxOK|wxCENTRE, $main_window );
+    Wx::MessageBox( "Installed '$par' into '$perl'", "Done", Wx::wxOK|Wx::wxCENTRE, $main_window );
   } else {
-    Wx::MessageBox( "Error installing '$par' into '$perl'", "Failed", wxOK|wxCENTRE, $main_window );
+    Wx::MessageBox( "Error installing '$par' into '$perl'", "Failed", Wx::wxOK|Wx::wxCENTRE, $main_window );
   }
 }
 
@@ -112,6 +114,7 @@ sub ok_clicked {
 
 sub on_install_par_dist {
   my ($window, $event) = @_;
+  require_modules();
 
   dialog($window);
 
